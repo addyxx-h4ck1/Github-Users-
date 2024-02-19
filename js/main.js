@@ -32,12 +32,14 @@ const fetchData = async (username) => {
               </div>
             </div>
 
-            <h2 class="name">${user.name || `User ${user.id}`}</h2>
+            <h2 class="name">${user.name || `User ${user.login}`}</h2>
             <p class="bio">
-              ${user.bio || `UserName ${user.login}`}
+              ${user.bio || `UserName-ID ${user.id}`}
             </p>
             <div class="buttons">
-              <button><a href=${user.html_url}>Follow User</a></button>
+              <button><a href=${
+                user.html_url
+              } target="_blank">Follow User</a></button>
             </div>
           </article>
           <article class="col-2">
@@ -85,11 +87,18 @@ const handleSubmit = () => {
 //////////if value is invalid don't submit else call  handle submit///////////
 submit.addEventListener('click', () => {
   if (input.value === '') {
+    parent.innerHTML = ''
     submit.type = 'button'
     errMsg.style.display = 'block'
   } else {
+    parent.innerHTML = ''
     submit.type = 'submit'
     errMsg.style.display = 'none'
     handleSubmit()
   }
+})
+
+input.addEventListener('change', (e) => {
+  submit.type = 'submit'
+  errMsg.style.display = 'none'
 })
