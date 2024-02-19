@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Nunito Sans', sans-serif;
 }
 /* ==============header-section============= */
 .header-section {
@@ -78,9 +81,10 @@ h3 a {
     padding: 0 1rem;
     text-align: justify;
     text-justify: newspaper;
+    font-size: 15px;
   }
   .header-wrapper h1 {
-    font-size: 60px;
+    font-size: 40px;
     text-align: center;
     padding: 0 1rem;
   }
@@ -379,7 +383,7 @@ form label {
 }
 .about-user {
   line-height: 2rem;
-  font-size: 18px;
+  font-size: 15px;
 }
 /* col-2 */
 /* ==============user -info============= */
@@ -438,6 +442,13 @@ footer h1 {
   text-align: center;
   margin-top: 2rem;
   color: #dddddd72;
+}
+@media screen and (max-width: 500px) {
+  .footer-wrapper .policy-par p {
+    width: 100%;
+    line-height: 2rem;
+    font-size: 14px;
+  }
 }
 /* ==============Footer============= */
 

@@ -6,17 +6,17 @@ let parent = document.querySelector('main')
 const error = document.querySelector('.err-block')
 const loader = document.querySelector('.loader')
 ////get the user///////////
-const getUser = (username) => {
-  fetch(`https://api.github.com/users/${username}`).then((res) => {
-    if (!res.ok) {
-      error.style.display = 'flex'
-      parent.innerHTML = error.innerHTML
-      console.log(res)
-    } else {
-      const resJson = res.json()
-      const userArr = [resJson]
-      let userHtml = userArr.map((user) => {
-        return `<section class="user-info">
+const fetchData = async (username) => {
+  const res = await fetch(`https://api.github.com/users/${username}`)
+  if (!res.ok) {
+    error.style.display = 'flex'
+    parent.innerHTML = error.innerHTML
+    return
+  } else {
+    const userData = await res.json()
+    const userDataArr = [userData]
+    let userHtml = userDataArr.map((user) => {
+      return `<section class="user-info">
         <div class="user-info-wrapper">
           <article class="col-1">
             <div class="image">
@@ -57,7 +57,7 @@ const getUser = (username) => {
             </section>
             <section class="about-user">
               <p><strong>Name : </strong> ${user.name || `${user.login}`}</p>
-              <p><strong>Works at : </strong> ${user.avatar_url || ''}</p>
+              <p><strong>Works at : </strong> ${user.company || ''}</p>
               <p><strong>Email : ${user.email || ``}</strong></p>
               <p><strong>GitHub User-ID : </strong> ${user.id}</p>
               <p><strong>GitHub UserName : </strong> ${user.login}</p>
@@ -68,18 +68,17 @@ const getUser = (username) => {
           </article>
         </div>
       </section>`
-      })
-      userHtml.join('')
-      parent.innerHTML = userHtml[0]
-    }
-  })
+    })
+    userHtml.join('')
+    parent.innerHTML = userHtml[0]
+  }
 }
 
 /////handle submit/////////////////
 const handleSubmit = () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault()
-    getUser(input.value)
+    fetchData(input.value)
   })
 }
 
